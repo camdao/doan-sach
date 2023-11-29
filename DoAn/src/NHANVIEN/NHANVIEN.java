@@ -1,19 +1,13 @@
-package NHANVIEN;
-
+package NhanVien;
 import java.util.Scanner;
-import abstr_interf.*;
-
-
-public class NHANVIEN implements INhap,IXuat{
-	Scanner sc=new Scanner(System.in);
-
-	public String manv;
-	public String tennv;
-	public String ngaysinhnv;
-	public String sdtnv;
-	public String diachinv;
-	public String luong;
-	public NHANVIEN() {
+public class NhanVien implements INhap_IXuat{
+	String manv;
+	String tennv;
+	String ngaysinhnv;
+	String sdtnv;
+	String diachinv;
+	String luong;
+	public NhanVien() {
 		manv="";
 		tennv="";
 		ngaysinhnv="";
@@ -21,11 +15,12 @@ public class NHANVIEN implements INhap,IXuat{
 		diachinv="";
 	}
 	public void nhap() {
+		Scanner sc = new Scanner(System.in);
         System.out.println("Nhap thong tin nhan vien: ");
-        System.out.print("Ma nhan vien: "); manv=sc.nextLine();
+//        System.out.print("Ma nhan vien: "); manv=sc.nextLine();
         System.out.print("Ten nhan vien: "); tennv=sc.nextLine();
         System.out.print("Ngay sinh nhan vien: "); ngaysinhnv=sc.nextLine();
-        System.out.print("SDT nhan vien: "); sdtnv=sc.nextLine();
+//        System.out.print("SDT nhan vien: "); sdtnv=sc.nextLine();
         System.out.print("Dia chi nhan vien: "); diachinv=sc.nextLine();
         System.out.print("Luong: "); luong=sc.nextLine();
 
