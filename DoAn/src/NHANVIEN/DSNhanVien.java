@@ -1,16 +1,17 @@
-package NhanVien;
+package NHANVIEN;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import abstr_interf.*;
 
 
-class DSNhanVien extends Menu{
-	public static ArrayList<NhanVien> DSNhanVien;
+public class DSNhanVien extends MENU{
+	public static ArrayList<NHANVIEN> DanhSachNhanVien;
 	public DSNhanVien() {
-		DSNhanVien = new ArrayList<NhanVien>(0);
+		DanhSachNhanVien = new ArrayList<NHANVIEN>(0);
 	}
     Scanner sc = new Scanner(System.in);
     
@@ -19,7 +20,7 @@ class DSNhanVien extends Menu{
     	System.out.println("Nhap cong viec cua nhan vien: \n1.Thu ngan. \n2.Kho. \n3.Bao ve."); choose=sc.nextLine();
 		if(choose.equals("1")) {
 			boolean nhaplaimanv=false;
-			NhanVien x=new ThuNgan();
+			NHANVIEN x=new THUNGAN();
 		    while (!nhaplaimanv) {
 		    	System.out.println("Nhap ma nhan vien: ");
 	            x.manv = sc.nextLine();
@@ -42,11 +43,11 @@ class DSNhanVien extends Menu{
 					nhaplaisdt=true;
 				}
 			}
-			DSNhanVien.add(x);
+			DanhSachNhanVien.add(x);
 		}
 		else if(choose.equals("2")) {
 		    boolean nhaplai = false;
-            NhanVien x = new Kho();
+            NHANVIEN x = new KHO();
             while (!nhaplai) {
                 System.out.println("Nhap ma nhan vien: ");
                 x.manv = sc.nextLine();
@@ -68,11 +69,11 @@ class DSNhanVien extends Menu{
 					nhaplaisdt=true;
 				}
 			}
-			DSNhanVien.add(x);
+			DanhSachNhanVien.add(x);
 		}
 		else if(choose.equals("3")) {
 		    boolean nhaplai = false;
-            NhanVien x = new BaoVe();
+            NHANVIEN x = new BAOVE();
             while (!nhaplai) {
                 System.out.println("Nhap ma nhan vien: ");
                 x.manv = sc.nextLine();
@@ -94,16 +95,16 @@ class DSNhanVien extends Menu{
 					nhaplaisdt=true;
 				}
 			}
-			DSNhanVien.add(x);
+			DanhSachNhanVien.add(x);
 		}
     }
     public void xoa(){
         String MaNVXoa;
         boolean found=false;
         System.out.print("Nhap ma nhan vien muon xoa: "); MaNVXoa=sc.nextLine();
-        for (NhanVien NhanVien : DSNhanVien)
+        for (NHANVIEN NhanVien : DanhSachNhanVien)
             if (NhanVien.manv.equals(MaNVXoa)){
-                DSNhanVien.remove(NhanVien);
+                DanhSachNhanVien.remove(NhanVien);
                 found = true;
                 System.out.println("Da xoa !");
                 break;
@@ -117,7 +118,7 @@ class DSNhanVien extends Menu{
         boolean found=false;
         System.out.print("Nhap ma nhan vien muon sua: "); 
         MaNVSua=sc.nextLine();   
-        for (NhanVien NhanVien : DSNhanVien) {
+        for (NHANVIEN NhanVien : DanhSachNhanVien) {
             if (NhanVien.manv.equals(MaNVSua)) {
                 Scanner sc = new Scanner(System.in);
                 found=true;
@@ -167,8 +168,8 @@ class DSNhanVien extends Menu{
     }
     public void danhsach(){
         int i=1;
-        System.out.println("Danh sach co "+DSNhanVien.size()+" nhan vien:");
-        for (NhanVien nv : DSNhanVien) {
+        System.out.println("Danh sach co "+DanhSachNhanVien.size()+" nhan vien:");
+        for (NHANVIEN nv : DanhSachNhanVien) {
             System.out.print(i+"/ ");
             nv.xuat();
             System.out.println();
@@ -179,7 +180,7 @@ class DSNhanVien extends Menu{
         String MaNVTimKiem;
         boolean found=false;
         System.out.print("Nhap ma nhan vien can tim: "); MaNVTimKiem=sc.nextLine();
-        for (NhanVien NhanVien : DSNhanVien){
+        for (NHANVIEN NhanVien : DanhSachNhanVien){
             if (NhanVien.manv.equals(MaNVTimKiem)){
                 found = true;
                 NhanVien.xuat();
@@ -189,26 +190,26 @@ class DSNhanVien extends Menu{
         if (!found)
             System.out.println("Khong tim thay nhan vien !");
     }
-    public void WriteFile() {
+    public static void WriteFile() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("datanhanvien.txt"))) {
-            for (NhanVien x : DSNhanVien) {
+            for (NHANVIEN x : DanhSachNhanVien) {
                 writer.write(x.manv + ",");
                 writer.write(x.tennv + ",");
                 writer.write(x.ngaysinhnv + ",");
                 writer.write(x.sdtnv + ",");
                 writer.write(x.diachinv + ",");
                 writer.write(x.luong + ",");
-                if(x instanceof ThuNgan) {
+                if(x instanceof THUNGAN) {
                 	writer.write("1,");
-                	writer.write( ((ThuNgan)x).ngaybanhang + ",");
+                	writer.write( ((THUNGAN)x).ngaybanhang + ",");
                 }
-                if(x instanceof Kho) {
+                if(x instanceof KHO) {
                 	writer.write("2,");
-                	writer.write( ((Kho)x).ngaykiemkho + ",");
+                	writer.write( ((KHO)x).ngaykiemkho + ",");
                 }
-                if(x instanceof BaoVe) {
+                if(x instanceof BAOVE) {
                 	writer.write("3,");
-                	writer.write( ((BaoVe)x).catruc + ",");
+                	writer.write( ((BAOVE)x).catruc + ",");
                 }
                 writer.newLine(); // Xuống dòng cho mỗi nhân viên
                 
@@ -219,7 +220,7 @@ class DSNhanVien extends Menu{
             e.printStackTrace();
         }
     }
-    public void ReadFile() {
+    public static void ReadFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader("datanhanvien.txt"))) {
         	String line;
             while ((line = reader.readLine()) != null) {
@@ -231,10 +232,10 @@ class DSNhanVien extends Menu{
                 String diaChiNV = parts[4];
                 String luongNV = parts[5];
                 String currentRole = parts[6];
-                NhanVien nv ;
+                NHANVIEN nv ;
                 if (currentRole.equals("1")) {
-                	nv = new ThuNgan();
-                    ((ThuNgan)nv).ngaybanhang = parts[7];
+                	nv = new THUNGAN();
+                    ((THUNGAN)nv).ngaybanhang = parts[7];
                     nv.manv = maNV;
                     nv.tennv = tenNV;
                     nv.ngaysinhnv = ngaySinhNV;
@@ -242,10 +243,10 @@ class DSNhanVien extends Menu{
                     nv.diachinv = diaChiNV;
                     nv.luong = luongNV;
                    
-                    DSNhanVien.add(nv);
+                    DanhSachNhanVien.add(nv);
                 } else if (currentRole.equals("2")) {
-                    nv = new Kho();
-                    ((Kho)nv).ngaykiemkho = parts[7]; 
+                    nv = new KHO();
+                    ((KHO)nv).ngaykiemkho = parts[7]; 
                     nv.manv = maNV;
                     nv.tennv = tenNV;
                     nv.ngaysinhnv = ngaySinhNV;
@@ -253,10 +254,10 @@ class DSNhanVien extends Menu{
                     nv.diachinv = diaChiNV;
                     nv.luong = luongNV;
                    
-                    DSNhanVien.add(nv);
+                    DanhSachNhanVien.add(nv);
                 } else if (currentRole.equals("3")) {
-                    nv = new BaoVe();
-                    ((BaoVe)nv).catruc = parts[7];
+                    nv = new BAOVE();
+                    ((BAOVE)nv).catruc = parts[7];
                     nv.manv = maNV;
                     nv.tennv = tenNV;
                     nv.ngaysinhnv = ngaySinhNV;
@@ -264,24 +265,23 @@ class DSNhanVien extends Menu{
                     nv.diachinv = diaChiNV;
                     nv.luong = luongNV;
                    
-                    DSNhanVien.add(nv);
+                    DanhSachNhanVien.add(nv);
                 }            
-            }   
-            System.out.println("Doc file thanh cong!");
+            }  
         
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public static int check_manv(String y){
-        for(NhanVien x : DSNhanVien){
+        for(NHANVIEN x : DanhSachNhanVien){
            if(x.manv.equals(y))
                return -1;
        }
        return 0;
     }
     public static int check_sdtnv(String y){
-        for(NhanVien x : DSNhanVien){
+        for(NHANVIEN x : DanhSachNhanVien){
            if(x.sdtnv.equals(y))
                return -1;
        }

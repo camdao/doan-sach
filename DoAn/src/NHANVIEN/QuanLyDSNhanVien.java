@@ -1,22 +1,24 @@
-package NhanVien;
+package NHANVIEN;
+
 import java.util.Scanner;
 
 
-class QuanLyDSNhanVien {
+public class QuanLyDSNhanVien {
     public DSNhanVien dsNhanVien;
+            Scanner sc = new Scanner(System.in);
+
     public QuanLyDSNhanVien(){
     	dsNhanVien = new DSNhanVien();
     }
-    void Menu(){
+    public void Menu(){
         int lua_chon;
-       Scanner sc=new Scanner(System.in);
        	boolean flag=true;
         while(flag){
-            System.out.println(" 1/Them nhan vien.\n 2/Xoa nhan vien.\n 3/Sua nhan vien.\n 4/Xuat danh sach nhan vien.\n 5/Tim kiem nhan vien.\n 6.Thoat.");
+            System.out.println(" 1/Them nhan vien.\n 2/Xoa nhan vien.\n 3/Sua nhan vien.\n 4/Xuat danh sach nhan vien.\n 5/Tim kiem nhan vien.\n 6.Quay lai.\n 7.Thoat\n");
             lua_chon=sc.nextInt();
             switch(lua_chon){
                 case 1:
-		    dsNhanVien.them();
+					dsNhanVien.them();
                     break;
                 case 2:
                     dsNhanVien.xoa();
@@ -32,10 +34,13 @@ class QuanLyDSNhanVien {
                     break;
                 case 6:
                     flag=false;
+                    DSNhanVien.WriteFile();
                     break;
+                case 7:
+                    DSNhanVien.WriteFile();
+                    System.exit(0);
            }
         }
     }
 
 }
- 
