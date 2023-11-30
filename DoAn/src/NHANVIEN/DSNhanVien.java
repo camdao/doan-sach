@@ -120,7 +120,6 @@ public class DSNhanVien extends MENU{
         MaNVSua=sc.nextLine();   
         for (NHANVIEN NhanVien : DanhSachNhanVien) {
             if (NhanVien.manv.equals(MaNVSua)) {
-                Scanner sc = new Scanner(System.in);
                 found=true;
                 System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. ");
                 sua=sc.nextInt();
@@ -267,7 +266,7 @@ public class DSNhanVien extends MENU{
                    
                     DanhSachNhanVien.add(nv);
                 }            
-            }  
+            }   
         
         } catch (Exception e) {
             e.printStackTrace();

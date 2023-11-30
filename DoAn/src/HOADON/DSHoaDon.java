@@ -106,6 +106,15 @@ public class DSHoaDon {
         }
     }
     private void nhapMaKhachHang(HOADON HoaDonMoi){
+        //neu hoa don da co ma khach hang la KHACHHANGTX thi giam diem tich luy xuong
+        if (!HoaDonMoi.ChiTietHoaDon.MaKH.isEmpty()){
+            for (KHACHHANG kh : DSKHACHHANG.DSKH ) {
+                if (HoaDonMoi.ChiTietHoaDon.MaKH.equals(kh.Id) && (kh instanceof KHACHHANGTX)){
+                    ((KHACHHANGTX)kh).setDiemtichluy(((KHACHHANGTX)kh).getDiemtichluy()-1);
+                    break;
+                }
+            }
+        }
         Scanner sc = new Scanner(System.in);
         boolean flag;
         boolean found;
