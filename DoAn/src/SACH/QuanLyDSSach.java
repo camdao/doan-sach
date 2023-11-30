@@ -3,7 +3,7 @@ package SACH;
 import java.util.Scanner;
 
 public class QuanLyDSSach{
-    public DSSach dsSach = new DSSach();
+    private DSSach dsSach = new DSSach();
     Scanner sc=new Scanner(System.in);
 
     public void Menu(){

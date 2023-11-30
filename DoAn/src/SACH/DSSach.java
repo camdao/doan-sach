@@ -23,36 +23,21 @@ public class DSSach  extends MENU{
     }
 
     public void them(){
-        boolean inputValid = false;
-
-        while (!inputValid) {
-            try {
-                SACH sachmoi = new SACH();
-                sachmoi.nhap();
-                DanhSachSach.add(sachmoi);
-                themsach(sachmoi.toString());
-                SACH.updateKhoSach(sachmoi.SoLuong);
-                
-                // Nếu không có ngoại lệ xảy ra, đánh dấu là dữ liệu hợp lệ và thoát khỏi vòng lặp
-                inputValid = true;
-            } catch (InputMismatchException ex) {
-                System.out.println("Nhap Sai Du Lieu");
-                // Bỏ qua dữ liệu hiện tại và yêu cầu người dùng nhập lại
-            } catch (Exception e) {
-                System.out.println("Da Xay Ra Loi " + e.getMessage());
-                e.printStackTrace();
-                // Xử lý ngoại lệ khác nếu cần thiết
-            }
-        }
+        SACH sachmoi = new SACH();
+        sachmoi.nhap();
+        DanhSachSach.add(sachmoi);
+        themsach(sachmoi.toString());
+        SACH.updateKhoSach(sachmoi.getSoLuong());
+        
     }
     public void xoa(){
         String MaSachXoa;
         boolean found=false;
         System.out.print("Nhap ma sach muon xoa: "); MaSachXoa=sc.nextLine();
         for (SACH sach : DanhSachSach)
-            if (sach.MaSach.equals(MaSachXoa)){
+            if (sach.getMaSach().equals(MaSachXoa)){
                 found = true;
-                SACH.updateKhoSach(-sach.SoLuong);
+                SACH.updateKhoSach(-sach.getSoLuong());
                 DanhSachSach.remove(sach);
                 System.out.println("Da xoa !");
                 break;
@@ -70,7 +55,7 @@ public class DSSach  extends MENU{
         System.out.print("Nhap ma sach muon sua: "); MaSachSua=sc.nextLine();
 
         for (SACH sach : DanhSachSach){
-            if (sach.MaSach.equals(MaSachSua)){
+            if (sach.getMaSach().equals(MaSachSua)){
                 found = true;
                 sach.xuat(); System.out.println();
                 System.out.println("Chon thong tin can sua: ");
@@ -79,37 +64,64 @@ public class DSSach  extends MENU{
                 switch (lua_chon) {
                     case 1:
                         System.out.print("Nhap ma sach moi: ");
-                        sach.MaSach=sc.nextLine();
+                        sach.setMaSach(sc.nextLine());
                         break;
                     case 2:
                         System.out.print("Nhap ten sach moi: ");
-                        sach.TenSach=sc.nextLine();
+                        sach.setTenSach(sc.nextLine());
                         break;
                     case 3:
                         System.out.print("Nhap NXB moi: ");
-                        sach.NXB=sc.nextLine();
+                        sach.setNXB(sc.nextLine());
                         break;
                     case 4:
                         System.out.print("Nhap tac gia moi: ");
-                        sach.TacGia=sc.nextLine();
+                        sach.setTacGia(sc.nextLine());
                         break;
                     case 5:
-                        System.out.print("Nhap so trang moi: ");
-                        sach.SoTrang=sc.nextInt();
+                        while (true) {
+                            try{
+                                System.out.print("Nhap so trang moi: ");
+                                sach.setSoTrang(sc.nextInt());
+                                sc.nextLine();
+                                break;
+                                }
+                            catch(InputMismatchException ex){
+                                System.out.println("Nhap Sai Du Lieu So Trang,vui long nhap so");
+                                sc.nextLine();
+                            }
+                        }        
                         break;
                     case 6:
-                        int SoLuongCu=sach.SoLuong;
-                        System.out.print("Nhap so luong moi: ");
-                        sach.SoLuong=sc.nextInt();
-                        if(SoLuongCu < sach.SoLuong)
-                            SACH.updateKhoSach(sach.SoLuong-SoLuongCu);
-                        else if(SoLuongCu > sach.SoLuong)
-                            SACH.updateKhoSach(-(SoLuongCu-sach.SoLuong));
+                        while (true) {
+                            try{
+                                int SoLuongCu=sach.getSoLuong();
+                                System.out.print("Nhap so luong moi: ");
+                                sach.setSoLuong(sc.nextInt());
+                                SACH.updateKhoSach(sach.getSoLuong()-SoLuongCu);
+                                sc.nextLine();
+                                break;
+                                }
+                            catch(InputMismatchException ex){
+                                System.out.println("Nhap Sai Du Lieu So Luong,vui long nhap so");
+                                sc.nextLine();
+                            }
+                        }        
                         break;
                     case 7:
-                        System.out.print("Nhap gia tien moi: ");
-                        sach.GiaTien=sc.nextInt();
-                        break;
+                        while (true) {
+                            try{
+                                System.out.print("Nhap gia tien moi: ");
+                                sach.setGiaTien(sc.nextInt());
+                                sc.nextLine();
+                                break;
+                                }
+                            catch(InputMismatchException ex){
+                                System.out.println("Nhap Sai Du Lieu So Luong,vui long nhap so");
+                                sc.nextLine();
+                            }
+                        }  
+                        break;                      
                 }
                 System.out.println("Da sua !");
                 break;
@@ -127,7 +139,7 @@ public class DSSach  extends MENU{
         boolean found=false;
         System.out.print("Nhap ma sach can tim: "); MaSachTimKiem=sc.nextLine();
         for (SACH sach : DanhSachSach){
-            if (sach.MaSach.equals(MaSachTimKiem)){
+            if (sach.getMaSach().equals(MaSachTimKiem)){
                 found = true;
                 sach.xuat();
                 break;
