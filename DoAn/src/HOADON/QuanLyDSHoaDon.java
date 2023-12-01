@@ -3,6 +3,8 @@ package HOADON;
 
 import java.util.Scanner;
 
+import abstr_interf.CHECK;
+
 //import NHANVIEN.*;
 //import SACH.*;
 
@@ -14,13 +16,13 @@ public class QuanLyDSHoaDon{
     }
     Scanner sc =new Scanner(System.in);
     public void Menu(){
-        
-        int lua_chon=0;
         boolean flag = true;
         while(flag){ 
             System.out.println(" 1)Them hoa don\n 2)Tim kiem hoa don\n 3)Xoa hoa don\n 4)Xuat danh sach hoa don\n 5)Quay lai\n 6)Thoat");
-            System.out.print("Lua chon: "); 
-            lua_chon=sc.nextInt();
+            System.out.print("Lua chon: "); String temp = sc.nextLine();
+            int lua_chon;
+            if (!CHECK.isInteger(temp)) lua_chon=0;
+            else lua_chon=Integer.parseInt(temp);
             switch (lua_chon) {
                 case 1:
                     dsHoaDon.them();
@@ -41,6 +43,9 @@ public class QuanLyDSHoaDon{
                 case 6:
                     DSHoaDon.WriteFile();//dsHoaDon.WriteFile();
                     System.exit(0);
+                default:
+                    System.out.println("Lua chon khong hop le !");
+                    break;
             }
         }
     }

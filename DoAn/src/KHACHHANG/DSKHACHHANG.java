@@ -15,25 +15,24 @@ public class DSKHACHHANG extends MENU{
    
     public void them(){//thêm khách hàng vào list
         int choose=0;
-        boolean flag=true;//biến cờ để lặp lại cho đến khi nhận biến choose là kiểu int
+        String tmp;
         System.out.println("Vui long lua chon hinh thuc mua hang\n1:Mua truc tiep=>Khach hang thuong xuyen\n2:Mua Online=>Khach hang online");
-        
-        while(flag){
-            if(sc.hasNextInt()){//dòng tiếp theo nhập vào là 1 số nguyên
-               choose=sc.nextInt();
-               if(choose==1 || choose==2)
-                    flag=false;
-                else{
-                    System.out.println("nhap sai thong tin");
-                    System.out.println("Vui long lua chon hinh thuc mua hang\n1:Mua truc tiep=>Khach hang thuong xuyen\n2:Mua Online=>Khach hang online");
-                }
+            tmp=sc.nextLine();
+        while(true){
+               if(CHECK.isInteger(tmp)==true){
+                    choose=Integer.parseInt(tmp);
+                    if(choose==1 || choose==2)
+                        break;
+                    else{
+                        System.out.println("Nhap sai thong tin\nVui long lua chon hinh thuc mua hang\n1:Mua truc tiep=>Khach hang thuong xuyen\n2:Mua Online=>Khach hang online");
+                        tmp=sc.nextLine();
+                    }
+               }
+               else{
+                    System.out.println("Vui long nhap so nguyen");
+                    tmp=sc.nextLine();
+               }   
             }
-            else{
-                System.out.println("vui long nhap so nguyen");
-                sc.next();//không phải số nguyên nên đẩy đi tiếp vòng while luôn,loại dữ liệu nhập vào ra khỏi scanner
-            }
-        }
-        sc.nextLine();
         if(choose==1){
             KHACHHANG x= new KHACHHANGTX();
             x.nhap();
@@ -54,28 +53,27 @@ public class DSKHACHHANG extends MENU{
         System.out.println("\nNhap Ma Khach Hang can sua");
         S_MA=sc.nextLine();
         String s;
-        boolean flag=true;
-        for(KHACHHANG x :DSKH){
 
+        for(KHACHHANG x :DSKH){
             if(x.Id.equals(S_MA)){
                 if(x instanceof KHACHHANGTX){//x là khách hàng thường xuyên
                     System.out.print("\nChon muc can sua thong tin:\n1:Ma Khach Hang\n2:Ho ten\n3:Dia chi\n4:So dien thoai\n5:Diem tich luy\n");
-                while(flag){
-                    if(sc.hasNextInt()){
-                        choose=sc.nextInt();
-                    if(choose<=5 && choose>0)
-                            flag=false;
-                    else{
-                        System.out.println("!!! Nhap sai thong tin");
-                        System.out.print("\nChon muc can sua thong tin:\n1:Ma Khach Hang\n2:Ho ten\n3:Dia chi\n4:So dien thoai\n5:Diem tich luy\n");
-                    }
+                    String tmp=sc.nextLine();//biến string tạm đi kiểm tra có phải int không
+                    while(true){
+                        if(CHECK.isInteger(tmp)==true){
+                            choose=Integer.parseInt(tmp);
+                            if(choose<=5 && choose>0)
+                                break;
+                            else{
+                                System.out.print("\n!!! Nhap sai thong tin\nChon muc can sua thong tin:\n1:Ma Khach Hang\n2:Ho ten\n3:Dia chi\n4:So dien thoai\n5:Diem tich luy\n");
+                                tmp=sc.nextLine();
+                            }
                         }
-                    else{
-                        System.out.println("~ Vui long nhap so nguyen ~");
-                        sc.next();
+                        else{
+                            System.out.println("Vui long nhap so nguyen");
+                            tmp=sc.nextLine();
+                        }      
                     }
-                }
-                sc.nextLine();
 
                     if(choose==1){//cập nhật mã khách hàng
                         String k;
@@ -118,41 +116,48 @@ public class DSKHACHHANG extends MENU{
                     else if(choose==5){//cập nhật điểm tích lũy
                         System.out.println("Nhap DIEM TICH LUY cap nhat");
                         int k=0;
-                        while(flag){
-                            if(sc.hasNextInt()){
-                                k=sc.nextInt();
-                               if(k>0)
-                                    flag=false;
-                                else
-                                    System.out.println("~ Vui long nhap diem tich luy > 0 ~");
+                        tmp=sc.nextLine();//biến string tạm đi kiểm tra có phải int không
+                        while(true){
+                            if(CHECK.isInteger(tmp)==true){
+                                k=Integer.parseInt(tmp);
+                                if(k>=0){
+                                    ((KHACHHANGTX)x).setDiemtichluy(k);
+                                    break;
                                 }
-                            else{
-                                System.out.println("~ Vui long nhap so nguyen ~");
-                                sc.next();
+                                else{
+                                    System.out.println("~ Vui long nhap diem tich luy > 0 ~");
+                                    tmp=sc.nextLine();
+                                }
                             }
-                        }
-                        sc.nextLine();
-                        ((KHACHHANGTX)x).setDiemtichluy(k);
+                            else{
+                                System.out.println("Vui long nhap so nguyen");
+                                tmp=sc.nextLine();
+                            }      
+                        }  
                     }
                 }
+
                 else if(x instanceof KHACHHANGONLINE){//x là khách hàng online
                     System.out.print("\nChon muc can sua thong tin:\n1:Ma Khach Hang\n2:Ho ten\n3:Dia chi\n4:So dien thoai\n5:Ma don hang\n6:Gmail\n");
-                    while(flag){
-                        if(sc.hasNextInt()){
-                            choose=sc.nextInt();
-                                if(choose<=6 && choose>0)
-                                    flag=false;
-                                else{
+                    String tmp=sc.nextLine();
+                    while(true){
+                        if(CHECK.isInteger(tmp)==true){
+                            choose=Integer.parseInt(tmp);
+                            if(choose<=6 && choose>0)
+                               break;
+                            else{
                                     System.out.println("!!! Nhap sai thong tin");
                                     System.out.print("\nChon muc can sua thong tin: \n1:Ma Khach Hang\n2:Ho ten\n3:Dia chi\n4:So dien thoai\n5:Ma don hang\n6:Gmail\n");
+                                    tmp=sc.nextLine();
                                 }
                         }
                         else{
-                            System.out.println("~ Vui long nhap so nguyen ~");
-                            sc.next();
+                            System.out.println("vui long nhap so nguyen");
+                            tmp=sc.nextLine();
                         }
                     }
-                    sc.nextLine();
+
+
                     if(choose==1){//cập nhật mã khách hàng
                         String k;
                         while(true){
@@ -225,8 +230,6 @@ public class DSKHACHHANG extends MENU{
                     }
                 }
             }
-            else if(!(x.Id.equals(S_MA))  && DSKH.get(DSKH.size() - 1).Id==x.Id)//khác mã và cuối của array list
-                System.out.println("! Khong tim thay khach hang de sua thong tin");
         }
     }
 
@@ -277,7 +280,6 @@ public class DSKHACHHANG extends MENU{
                     fw.write(x.Id +"|"+x.Name+"|"+x.Address+"|"+x.Phone+"|"+((KHACHHANGONLINE)x).getMadonhang()+"|"+((KHACHHANGONLINE)x).getGmail()+"\n");
             }
             fw.close();
-            System.out.println("Data saved to file.");
             }
              catch (Exception e) {
                 System.out.println(e);

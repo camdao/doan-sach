@@ -3,6 +3,7 @@ import java.util.Scanner;
 import HOADON.*;
 import KHACHHANG.*;
 import SACH.*;
+import abstr_interf.CHECK;
 import NHANVIEN.*;
 
 public class Main {
@@ -16,13 +17,34 @@ public class Main {
         DSKHACHHANG.doc();
         DSSach.doc();
         DSNhanVien.ReadFile();
-
+        Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while (flag) {
+        
+           int lua_chon;
+            String tmp;
             System.out.print(" 1)Quan ly sach\n 2)Quan ly nhan vien\n 3)Quan ly hoa don\n 4)Quan ly khach hang\n 5)Thoat\n");
             System.out.print("Lua chon: ");
-            Scanner sc = new Scanner(System.in);
-            int lua_chon=sc.nextInt();
+
+            tmp=sc.nextLine();
+            while(true){
+                if(CHECK.isInteger(tmp)==true){
+                    lua_chon=Integer.parseInt(tmp);
+                    if(lua_chon>=1 && lua_chon<=5)
+                        break;
+                    else{
+                        System.out.println("!!! Nhap sai lua chon");
+                        System.out.print(" 1)Quan ly sach\n 2)Quan ly nhan vien\n 3)Quan ly hoa don\n 4)Quan ly khach hang\n 5)Thoat\n");
+                        System.out.print("Lua chon: ");
+                        tmp=sc.nextLine();
+                    }
+                }
+                else{
+                    System.out.println("Vui long nhap so nguyen");
+                    tmp=sc.nextLine();
+                }
+            }
+
             switch (lua_chon) {
                 case 1:
                     qlSach.Menu();

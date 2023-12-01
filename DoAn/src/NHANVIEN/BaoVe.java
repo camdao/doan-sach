@@ -2,7 +2,7 @@ package NHANVIEN;
 
 import java.util.Scanner;
 
-class BAOVE extends NHANVIEN{
+public class BAOVE extends NHANVIEN{
 	Scanner sc=new Scanner(System.in);
 	String catruc;
 	public BAOVE() {

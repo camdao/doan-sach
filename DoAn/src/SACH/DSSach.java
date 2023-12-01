@@ -9,9 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import abstr_interf.CHECK;
 import abstr_interf.MENU;
 
 public class DSSach  extends MENU{
@@ -23,36 +23,21 @@ public class DSSach  extends MENU{
     }
 
     public void them(){
-        boolean inputValid = false;
-
-        while (!inputValid) {
-            try {
-                SACH sachmoi = new SACH();
-                sachmoi.nhap();
-                DanhSachSach.add(sachmoi);
-                themsach(sachmoi.toString());
-                SACH.updateKhoSach(sachmoi.SoLuong);
-                
-                // Nếu không có ngoại lệ xảy ra, đánh dấu là dữ liệu hợp lệ và thoát khỏi vòng lặp
-                inputValid = true;
-            } catch (InputMismatchException ex) {
-                System.out.println("Nhap Sai Du Lieu");
-                // Bỏ qua dữ liệu hiện tại và yêu cầu người dùng nhập lại
-            } catch (Exception e) {
-                System.out.println("Da Xay Ra Loi " + e.getMessage());
-                e.printStackTrace();
-                // Xử lý ngoại lệ khác nếu cần thiết
-            }
-        }
+        SACH sachmoi = new SACH();
+        sachmoi.nhap();
+        DanhSachSach.add(sachmoi);
+        themsach(sachmoi.toString());
+        SACH.updateKhoSach(sachmoi.getSoLuong());
+        
     }
     public void xoa(){
         String MaSachXoa;
         boolean found=false;
         System.out.print("Nhap ma sach muon xoa: "); MaSachXoa=sc.nextLine();
         for (SACH sach : DanhSachSach)
-            if (sach.MaSach.equals(MaSachXoa)){
+            if (sach.getMaSach().equals(MaSachXoa)){
                 found = true;
-                SACH.updateKhoSach(-sach.SoLuong);
+                SACH.updateKhoSach(-sach.getSoLuong());
                 DanhSachSach.remove(sach);
                 System.out.println("Da xoa !");
                 break;
@@ -64,70 +49,133 @@ public class DSSach  extends MENU{
 
         }
     }
-    public void sua(){
+    public void sua(){//sửa 3
         String MaSachSua;
         boolean found=false;
-        System.out.print("Nhap ma sach muon sua: "); MaSachSua=sc.nextLine();
+        System.out.print("Nhap ma sach muon sua: ");
+        MaSachSua=sc.nextLine();
 
-        for (SACH sach : DanhSachSach){
-            if (sach.MaSach.equals(MaSachSua)){
+        for (SACH sach : DanhSachSach){//sửa 1
+            if (sach.getMaSach().equals(MaSachSua)){
                 found = true;
-                sach.xuat(); System.out.println();
-                System.out.println("Chon thong tin can sua: ");
-                System.out.print(" 1)Ma sach\n 2)Ten sach\n 3)NXB\n 4)Tac gia\n 5)So trang\n 6)So Luong\n 7)Gia tien\n");
-                int lua_chon=sc.nextInt(); sc.nextLine();
+                sach.xuat();
+                int lua_chon;
+                String tmp;
+                System.out.print("Chon thong tin can sua:\n 1)Ma sach\n 2)Ten sach\n 3)NXB\n 4)Tac gia\n 5)So trang\n 6)So Luong\n 7)Gia tien\n");
+                tmp=sc.nextLine();
+                while(true){
+                    if(CHECK.isInteger(tmp)==true){
+                    lua_chon=Integer.parseInt(tmp);
+                    if(lua_chon>=1 && lua_chon <=7)
+                        break;
+                    else{
+                        System.out.print("Nhap sai thong tin!!\nChon thong tin can sua:\n 1)Ma sach\n 2)Ten sach\n 3)NXB\n 4)Tac gia\n 5)So trang\n 6)So Luong\n 7)Gia tien\n");
+                        tmp=sc.nextLine();
+                    }
+               }
+               else{
+                    System.out.println("Vui long nhap so nguyen");
+                    tmp=sc.nextLine();
+               }   
+            }
                 switch (lua_chon) {
                     case 1:
                         System.out.print("Nhap ma sach moi: ");
-                        sach.MaSach=sc.nextLine();
+                        sach.setMaSach(sc.nextLine());
                         break;
                     case 2:
                         System.out.print("Nhap ten sach moi: ");
-                        sach.TenSach=sc.nextLine();
+                        sach.setTenSach(sc.nextLine());
                         break;
                     case 3:
                         System.out.print("Nhap NXB moi: ");
-                        sach.NXB=sc.nextLine();
+                        sach.setNXB(sc.nextLine());
                         break;
                     case 4:
                         System.out.print("Nhap tac gia moi: ");
-                        sach.TacGia=sc.nextLine();
+                        sach.setTacGia(sc.nextLine());
                         break;
-                    case 5:
-                        System.out.print("Nhap so trang moi: ");
-                        sach.SoTrang=sc.nextInt();
+                    case 5://sửa 2
+                        String tmp1;int sotrang;
+                        System.out.println("Nhap so trang moi: ");
+                            tmp1=sc.nextLine();
+                        while(true){
+                                if(CHECK.isInteger(tmp1)==true){
+                                    sotrang=Integer.parseInt(tmp1);
+                                    if(sotrang>=0){
+                                        sach.setSoTrang(sotrang);
+                                        break;
+                                    }   
+                                    else{
+                                        System.out.println("So trang khong hop le\nNhap so trang moi: ");
+                                        tmp1=sc.nextLine();
+                                    }
+                                }
+                                else{
+                                    System.out.println("Vui long nhap so nguyen");
+                                    tmp1=sc.nextLine();
+                                }   
+                            }       
                         break;
-                    case 6:
-                        int SoLuongCu=sach.SoLuong;
+                    case 6://sửa4
+                        String tmp3;int soluong;
                         System.out.print("Nhap so luong moi: ");
-                        sach.SoLuong=sc.nextInt();
-                        if(SoLuongCu < sach.SoLuong)
-                            SACH.updateKhoSach(sach.SoLuong-SoLuongCu);
-                        else if(SoLuongCu > sach.SoLuong)
-                            SACH.updateKhoSach(-(SoLuongCu-sach.SoLuong));
+                        tmp3=sc.nextLine();
+                    while(true){
+                        if(CHECK.isInteger(tmp3)==true){
+                                soluong=Integer.parseInt(tmp3);
+                                if(soluong>=0){
+                                    sach.setSoLuong(soluong);
+                                    break;
+                                } 
+                                else{
+                                    System.out.print("Nhap sai thong tin!\nNhap so luong moi: ");
+                                    tmp3=sc.nextLine();
+                                }
+                        }
+                        else{
+                                System.out.println("Vui long nhap so nguyen");
+                                tmp3=sc.nextLine();
+                        }   
+                    }
                         break;
                     case 7:
-                        System.out.print("Nhap gia tien moi: ");
-                        sach.GiaTien=sc.nextInt();
+                        String tmp2;int giatien;
+                        System.out.println("Nhap gia tien moi: ");
+                            tmp2=sc.nextLine();
+                        while(true){
+                                if(CHECK.isInteger(tmp2)==true){
+                                    giatien=Integer.parseInt(tmp2);
+                                    if(giatien>=0){
+                                        sach.setGiaTien(giatien);
+                                        break;
+                                    }   
+                                    else{
+                                        System.out.println("Gia tien khong hop le\nNhap gia tien moi: ");
+                                        tmp2=sc.nextLine();
+                                    }
+                                }
+                                else{
+                                    System.out.println("Vui long nhap so nguyen");
+                                    tmp2=sc.nextLine();
+                                }   
+                            }               
+                        System.out.println("Da sua !");
                         break;
                 }
-                System.out.println("Da sua !");
-                break;
             }
-        }
         if (!found)
             System.out.println("Khong tim thay ma sach !");
-        else{
+        else
             luu();
         }
     }
-
     public void timkiem(){
         String MaSachTimKiem;
         boolean found=false;
         System.out.print("Nhap ma sach can tim: "); MaSachTimKiem=sc.nextLine();
         for (SACH sach : DanhSachSach){
-            if (sach.MaSach.equals(MaSachTimKiem)){
+            if (sach.getMaSach().equals(MaSachTimKiem)){
                 found = true;
                 sach.xuat();
                 break;

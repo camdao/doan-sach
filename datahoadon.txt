@@ -1,50 +1,25 @@
-hoadon01,nhanvien01,nguyen van aaaaa,khachhang01,nguyen van bbbbbb,14-11-2023 14:35
-sach02,sach01
-nobita,doremon
-25000,25000
-3,1
-hoadon02,nhanvien01,nguyen van aaaaa,khachhang02,nguyen van cccc,14-11-2023 15:04
-sach01,sach02
-doremon,nobita
-25000,25000
-5,10
-hd001100,1,duy,lcd2k4,Luong Cam Dao,29-11-2023 19:14
-001,002
-sachvip1,sachvip2
-20000,30000
-2,2
-hd010,1,duy,lcd2k4,Luong Cam Dao,29-11-2023 19:47
+hoadon1,nv1,Nguyen Xuan Duy,htd2k4,Huynh Tan Duong,01-12-2023 21:52
+001,005
+Conan,Dragon ball
+25000,20000
+1,2
+hoadon2,nv4,Ho Huu Dai,lcd2k4,Luong Cam Dao,01-12-2023 21:53
 003,004
-sachvip3,sachvip4
-24000,25000
-2,1
-hd001,1,duy,lcd2k4,Luong Cam Dao,29-11-2023 20:05
+Giai Tich 1,Giai Tich 2
+100000,110000
+1,1
+hoadon3,nv1,Nguyen Xuan Duy,hhd2k4,Ho Huu Dai,01-12-2023 21:55
+003,005,004
+Giai Tich 1,Dragon ball,Giai Tich 2
+100000,20000,110000
+1,2,1
+hoadon4,nv4,Ho Huu Dai,nxd2k4,Nguyen Xuan Duy,01-12-2023 21:55
 001
-sachvip1
-20000
-7
-hd02,5,cam dao,lcd2k4,Luong Cam Dao,29-11-2023 20:32
-003
-sachvip3
-24000,24000
-1
-hd020,5,cam dao,lcd2k4,Luong Cam Dao,29-11-2023 20:33
-004
-sachvip4
+Conan
 25000
-2
-hd03,5,cam dao,lcd2k4,Luong Cam Dao,29-11-2023 20:44
-002,003
-sachvip2,sachvip3
-30000,24000
-5,2
-hd04,5,cam dao,lcd2k4,Luong Cam Dao,29-11-2023 20:47
-003
-sachvip3
-24000
-2
-hd05,5,cam dao,lcd2k4,Luong Cam Dao,29-11-2023 20:53
-004
-sachvip4
-25000
-2
+5
+hoadon5,nv1,Nguyen Xuan Duy,ehl2k,erling haaland,01-12-2023 21:56
+001,002,003,004,005
+Conan,Doremon,Giai Tich 1,Giai Tich 2,Dragon ball
+25000,20000,100000,110000,20000
+1,1,1,1,1

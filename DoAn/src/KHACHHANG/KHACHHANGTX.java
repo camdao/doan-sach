@@ -1,6 +1,8 @@
 package KHACHHANG;
 import java.util.Scanner;
 
+import abstr_interf.CHECK;
+
 public class KHACHHANGTX extends KHACHHANG{//kế thừa
         private int diemtichluy;
         Scanner sc=new Scanner(System.in);
@@ -10,23 +12,26 @@ public class KHACHHANGTX extends KHACHHANG{//kế thừa
         }
         @Override
         public void nhap(){ 
-            boolean flag=true;
+            String tmp;
             super.nhap();
             System.out.println("Nhap DIEM TICH LUY cua khach hang ");
-            while(flag){
-                if(sc.hasNextInt()){
-                    diemtichluy=sc.nextInt();
-                   if(diemtichluy>0)
-                        flag=false;
-                    else
+
+            tmp=sc.nextLine();
+            while(true){
+                if(CHECK.isInteger(tmp)==true){
+                    diemtichluy=Integer.parseInt(tmp);
+                    if(diemtichluy>=0)
+                        break;
+                    else{
                         System.out.println("vui long nhap diem tich luy > 0");
-                    }
+                        tmp=sc.nextLine();
+                    } 
+                }
                 else{
                     System.out.println("vui long nhap so nguyen");
-                    sc.next();
+                    tmp=sc.nextLine();
                 }
             }
-            sc.nextLine();
         }
         @Override
         public void xuat() {

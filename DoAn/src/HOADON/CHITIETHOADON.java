@@ -3,7 +3,6 @@ package HOADON;
 import java.util.ArrayList;
 
 public class CHITIETHOADON {
-
     String MaNV;
     String TenNV;
     String TenKH;

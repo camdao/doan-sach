@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 import NHANVIEN.*;
 import SACH.*;
+import abstr_interf.CHECK;
 import KHACHHANG.*;
 
 public class DSHoaDon {
@@ -67,13 +68,14 @@ public class DSHoaDon {
             //Them lai so luong cho sach va kho sach, xoa san pham
             for (int i=0; i<HoaDonMoi.ChiTietHoaDon.getSL(); i++)
             for (SACH sach : DSSach.DanhSachSach)
-                if (sach.MaSach.equals(HoaDonMoi.ChiTietHoaDon.DanhSachMaSanPham.get(i))){
-                    sach.SoLuong+=HoaDonMoi.ChiTietHoaDon.SoLuongMoiSP.get(i);
+                if (sach.getMaSach().equals(HoaDonMoi.ChiTietHoaDon.DanhSachMaSanPham.get(i))){
+                    sach.setSoLuong(sach.getSoLuong()+HoaDonMoi.ChiTietHoaDon.SoLuongMoiSP.get(i));
                     SACH.updateKhoSach(HoaDonMoi.ChiTietHoaDon.SoLuongMoiSP.get(i));
                 }
             HoaDonMoi.ChiTietHoaDon.DanhSachSanPham.removeAll(HoaDonMoi.ChiTietHoaDon.DanhSachSanPham);
             HoaDonMoi.ChiTietHoaDon.DanhSachMaSanPham.removeAll(HoaDonMoi.ChiTietHoaDon.DanhSachMaSanPham);
             HoaDonMoi.ChiTietHoaDon.SoLuongMoiSP.removeAll(HoaDonMoi.ChiTietHoaDon.SoLuongMoiSP);
+            HoaDonMoi.ChiTietHoaDon.DonGiaMoiSP.removeAll(HoaDonMoi.ChiTietHoaDon.DonGiaMoiSP);
         }
         //Them san pham
         int i=1;
@@ -85,18 +87,27 @@ public class DSHoaDon {
             System.out.print("Nhap ma san pham "+i+": "); MaSP=sc.nextLine();
             if (MaSP.isEmpty()) break;
             for (SACH sach : DSSach.DanhSachSach) {
-                if(sach.MaSach.equals(MaSP)){
+                if(sach.getMaSach().equals(MaSP)){
                     found=true;
-                    System.out.print("Nhap so luong: "); soluong=sc.nextInt(); sc.nextLine();
-                    if (soluong > sach.SoLuong) {
+                    System.out.print("Nhap so luong: "); String temp = sc.nextLine();
+                    if (!CHECK.isInteger(temp)){
+                        System.out.println("Nhap khong hop le !");
+                        break;
+                    }
+                    else if (Integer.parseInt(temp) <= 0){
+                        System.out.println("So luong nhap vao phai lon hon 0 !");
+                        break;
+                    }
+                    soluong=Integer.parseInt(temp);
+                    if (soluong > sach.getSoLuong()) {
                         System.out.println("So luong vuot qua so luong cua sach nay co !");
                         break;
                     }
-                    HoaDonMoi.ChiTietHoaDon.DanhSachSanPham.add(sach.TenSach);
-                    HoaDonMoi.ChiTietHoaDon.DanhSachMaSanPham.add(sach.MaSach);
-                    HoaDonMoi.ChiTietHoaDon.DonGiaMoiSP.add(sach.GiaTien);
+                    HoaDonMoi.ChiTietHoaDon.DanhSachSanPham.add(sach.getTenSach());
+                    HoaDonMoi.ChiTietHoaDon.DanhSachMaSanPham.add(sach.getMaSach());
+                    HoaDonMoi.ChiTietHoaDon.DonGiaMoiSP.add(sach.getGiaTien());
                     HoaDonMoi.ChiTietHoaDon.SoLuongMoiSP.add(soluong);
-                    sach.SoLuong-=soluong;
+                    sach.setSoLuong(sach.getSoLuong()-soluong);
                     SACH.updateKhoSach(-soluong);
                     i++;
                 }
@@ -164,8 +175,10 @@ public class DSHoaDon {
                 HoaDonMoi.Date=getTime();
                 HoaDonMoi.xuat();                
                 System.out.print(" 1)Luu hoa don\n 2)Sua lai\n");
-                System.out.print("Lua chon: ");
-                int lua_chon=sc.nextInt();
+                System.out.print("Lua chon: "); String temp = sc.nextLine();
+                int lua_chon;
+                if (!CHECK.isInteger(temp)) lua_chon=0;
+                else lua_chon=Integer.parseInt(temp);
                 switch (lua_chon) {
                     case 1:
                         sua_lai=false;
@@ -177,8 +190,9 @@ public class DSHoaDon {
                             valid_chose_case_sua=true;
                             System.out.println("Chon thong tin muon sua:");
                             System.out.print(" 1)Sua lai toan bo\n 2)Ma hoa don\n 3)Ma nhan vien\n 4)Ma khach hang\n 5)San pham\n");
-                            System.out.print("Lua chon: ");
-                            lua_chon=sc.nextInt(); sc.nextLine();
+                            System.out.print("Lua chon: "); temp = sc.nextLine();
+                            if (!CHECK.isInteger(temp)) lua_chon=0;
+                            else lua_chon=Integer.parseInt(temp);                            
                             switch (lua_chon) {
                                 case 1:
                                     sua_lai_toan_bo = true;

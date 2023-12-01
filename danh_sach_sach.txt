@@ -1,7 +1,6 @@
-001|sachvip1|2023|toi|20|10|20000
-002|sachvip2|2023|toi1|21|15|30000
-003|sachvip3|2023|toi2|22|12|24000
-004|sachvip4|2023|toi3|23|9|25000
-1|sachloz|?|?|5|99|50000
-2|as|as|as|55|99|55555
-12|ss|s|s|5|55|55
+001|Conan|Kim Dong|Aoyama Gosho|150|92|25000
+002|Doremon|Kim Dong|Fujiko Fujio|140|86|20000
+003|Giai Tich 1|NXB DHQG TPHCM|Nguyen Dinh Huy|200|47|100000
+004|Giai Tich 2|NXB DHQG TPHCM| Nguyen Dinh Huy|110|37|110000
+005|Dragon ball|Kim Dong|Toriyama Akira|50|65|20000
+test sach|test sach|test sach|test sasch|100|200|300

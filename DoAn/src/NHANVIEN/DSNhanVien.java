@@ -101,7 +101,8 @@ public class DSNhanVien extends MENU{
     public void xoa(){
         String MaNVXoa;
         boolean found=false;
-        System.out.print("Nhap ma nhan vien muon xoa: "); MaNVXoa=sc.nextLine();
+        System.out.print("Nhap ma nhan vien muon xoa: "); 
+        MaNVXoa=sc.nextLine();
         for (NHANVIEN NhanVien : DanhSachNhanVien)
             if (NhanVien.manv.equals(MaNVXoa)){
                 DanhSachNhanVien.remove(NhanVien);
@@ -113,55 +114,245 @@ public class DSNhanVien extends MENU{
             System.out.println("Khong tim thay nhan vien de xoa");
     }
     public void sua(){
-        String MaNVSua;
-        int sua=0;
+    	int sua=0;
+    	String MaNVSua;
         boolean found=false;
         System.out.print("Nhap ma nhan vien muon sua: "); 
         MaNVSua=sc.nextLine();   
-        for (NHANVIEN NhanVien : DanhSachNhanVien) {
-            if (NhanVien.manv.equals(MaNVSua)) {
-                found=true;
-                System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. ");
-                sua=sc.nextInt();
-                while(sua < 1 || sua > 5) {
-                	System.out.println("Vui long nhap dung cu phap!");
-                }
-                if (sua == 1) {
-                    String k;
-                    sc.nextLine();
-                    boolean checkvar=true;
-                    while (checkvar==true) {
-                        System.out.println("Nhap ma nhan vien cap nhat: ");
-                        k=sc.nextLine();
-                        int flag1 = check_manv(k);
-                        if (flag1 == -1)
-                            System.out.println("Ma nhan vien da ton tai!");
-                        else if (flag1 == 0) {
-                            NhanVien.manv = k;
-                            checkvar=false;
-                        }
-                    }
+        for (NHANVIEN NhanVien : DanhSachNhanVien)
+            if (NhanVien.manv.equals(MaNVSua)){
+            	if(NhanVien instanceof THUNGAN) {	            	
+	            	found=true;
+	            	String tmp;
+	            	System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay ban hang.");
+	                tmp=sc.nextLine();	                
+	                while(true){
+	                    if(CHECK.isInteger(tmp)==true){
+	                        sua=Integer.parseInt(tmp);
+	                        if(sua>=1&&sua<=6)
+	                            break;
+	                        else{
+	                           System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay ban hang.");
+	                            tmp=sc.nextLine();
+	                        }
+	                    }
+	                    else{
+	                        System.out.println("Vui long nhap so nguyen");
+	                        tmp=sc.nextLine();
+	                    }
+	                }
+	                if (sua == 1) {
+	                    String k;
+	                    boolean checkvar=true;
+	                    while (checkvar==true) {
+	                        System.out.println("Nhap ma nhan vien cap nhat: ");
+	                        k=sc.nextLine();
+	                        int flag1 = check_manv(k);
+	                        if (flag1 == -1)
+	                            System.out.println("Ma nhan vien da ton tai!");
+	                        else if (flag1 == 0) {
+	                            NhanVien.manv = k;
+	                            checkvar=false;
+	                        }
+	                    }
+					}
+					else if(sua==2) {
+						System.out.println("Nhap ten nhan vien cap nhat: ");
+						NhanVien.tennv=sc.nextLine();
+					}
+					else if(sua==3){				
+						boolean nhaplaingaysinh=false;
+					    while (!nhaplaingaysinh) {				    	
+					    	System.out.println("Nhap ngay sinh nhan vien cap nhat: ");
+					    	NhanVien.ngaysinhnv=sc.nextLine();
+				            if(!checkngaysinh(NhanVien.ngaysinhnv)){
+				            	System.out.println("Dinh dang ngay sinh khong hop le. Su dung dinh dang dd/mm/yyyy!");
+				            }
+				            else{
+				                nhaplaingaysinh = true;
+				            }
+				        }
+					}
+					else if(sua==4) {
+						String n;
+						boolean nhaplaisdt=true;
+						while (nhaplaisdt==true) {
+							System.out.println("Nhap so dien thoai cap nhat:");
+							n=sc.nextLine();
+							int flag3=check_sdtnv(n);
+							if(flag3==-1)
+								System.out.println("So dien thoai bi trung voi nhan vien khac!");						
+							else if(flag3 == 0){
+								NhanVien.sdtnv=n;
+								nhaplaisdt=false;
+							}
+						}		   
+					}
+					else if(sua==5){
+						System.out.println("Nhap dia chi nhan vien cap nhat: ");
+						NhanVien.diachinv=sc.nextLine();
+					}
+					else if(sua==6) {
+						System.out.println("Nhap ngay ban hang cap nhat: ");
+						((THUNGAN)NhanVien).ngaybanhang=sc.nextLine();
+					}
+            	}
+				else if(NhanVien instanceof KHO) {
+					found=true;
+					String tmp;
+					System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay kiem kho.");
+					tmp=sc.nextLine();	                
+					while(true){
+						if(CHECK.isInteger(tmp)==true){
+							sua=Integer.parseInt(tmp);
+							if(sua>=1&&sua<=6)
+								break;
+							else{
+								System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay kiem kho.");
+								tmp=sc.nextLine();
+							}
+						}
+						else{
+							System.out.println("Vui long nhap so nguyen");
+							tmp=sc.nextLine();
+						}
+					}
+					if (sua == 1) {
+						String k;
+						boolean checkvar=true;
+						while (checkvar==true) {
+							System.out.println("Nhap ma nhan vien cap nhat: ");
+							k=sc.nextLine();
+							int flag1 = check_manv(k);
+							if (flag1 == -1)
+								System.out.println("Ma nhan vien da ton tai!");
+							else if (flag1 == 0) {
+								NhanVien.manv = k;
+								checkvar=false;
+							}
+						}
+					}
+					else if(sua==2) {
+						System.out.println("Nhap ten nhan vien cap nhat: ");
+						NhanVien.tennv=sc.nextLine();
+					}
+					else if(sua==3){				
+						boolean nhaplaingaysinh=false;
+						while (!nhaplaingaysinh) {				    	
+							System.out.println("Nhap ngay sinh nhan vien cap nhat: ");
+							NhanVien.ngaysinhnv=sc.nextLine();
+							if(!checkngaysinh(NhanVien.ngaysinhnv)){
+								System.out.println("Dinh dang ngay sinh khong hop le. Su dung dinh dang dd/mm/yyyy!");
+							}
+							else{
+								nhaplaingaysinh = true;
+							}
+						}
+					}
+					else if(sua==4) {
+						String n;
+						boolean nhaplaisdt=true;
+						while (nhaplaisdt==true) {
+							System.out.println("Nhap so dien thoai cap nhat:");
+							n=sc.nextLine();
+							int flag3=check_sdtnv(n);
+							if(flag3==-1)
+								System.out.println("So dien thoai bi trung voi nhan vien khac!");						
+							else if(flag3 == 0){
+								NhanVien.sdtnv=n;
+								nhaplaisdt=false;
+							}
+						}		                 
+					}
+					else if(sua==5){
+						System.out.println("Nhap dia chi nhan vien cap nhat: ");
+						NhanVien.diachinv=sc.nextLine();
+					}
+					else if(sua==6) {
+						System.out.println("Nhap ngay kiem kho cap nhat: ");
+						((KHO)NhanVien).ngaykiemkho=sc.nextLine();
+					}
 				}
-				else if(sua==2) {
-					sc.nextLine();
-					System.out.println("Nhap ten nhan vien cap nhat: ");
-					NhanVien.tennv=sc.nextLine();
+				else if(NhanVien instanceof BAOVE) {
+					found=true;
+					String tmp;
+					System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ca truc.");
+					tmp=sc.nextLine();	                
+					while(true){
+						if(CHECK.isInteger(tmp)==true){
+							sua=Integer.parseInt(tmp);
+							if(sua>=1&&sua<=6)
+								break;
+							else{
+								System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ca truc.");
+								tmp=sc.nextLine();
+							}
+						}
+						else{
+							System.out.println("Vui long nhap so nguyen");
+							tmp=sc.nextLine();
+						}
+					}
+					if (sua == 1) {
+						String k;
+						boolean checkvar=true;
+						while (checkvar==true) {
+							System.out.println("Nhap ma nhan vien cap nhat: ");
+							k=sc.nextLine();
+							int flag1 = check_manv(k);
+							if (flag1 == -1)
+								System.out.println("Ma nhan vien da ton tai!");
+							else if (flag1 == 0) {
+								NhanVien.manv = k;
+								checkvar=false;
+							}
+						}
+					}
+					else if(sua==2) {
+						System.out.println("Nhap ten nhan vien cap nhat: ");
+						NhanVien.tennv=sc.nextLine();
+					}
+					else if(sua==3){				
+						boolean nhaplaingaysinh=false;
+						while (!nhaplaingaysinh) {				    	
+							System.out.println("Nhap ngay sinh nhan vien cap nhat: ");
+							NhanVien.ngaysinhnv=sc.nextLine();
+							if(!checkngaysinh(NhanVien.ngaysinhnv)){
+								System.out.println("Dinh dang ngay sinh khong hop le. Su dung dinh dang dd/mm/yyyy!");
+							}
+							else{
+								nhaplaingaysinh = true;
+							}
+						}
+					}
+					else if(sua==4) {
+						String n;
+						boolean nhaplaisdt=true;
+						while (nhaplaisdt==true) {
+							System.out.println("Nhap so dien thoai cap nhat:");
+							n=sc.nextLine();
+							int flag3=check_sdtnv(n);
+							if(flag3==-1)
+								System.out.println("So dien thoai bi trung voi nhan vien khac!");						
+							else if(flag3 == 0){
+								NhanVien.sdtnv=n;
+								nhaplaisdt=false;
+							}
+						}		   
+					}
+					else if(sua==5){
+						System.out.println("Nhap dia chi nhan vien cap nhat: ");
+						NhanVien.diachinv=sc.nextLine();
+					}
+					else if(sua==6) {
+						System.out.println("Nhap ca truc cap nhat: ");
+						((BAOVE)NhanVien).catruc=sc.nextLine();
+					}
 				}
-				else if(sua==3){
-					sc.nextLine();
-					System.out.println("Nhap ngay sinh nhan vien cap nhat: ");
-					NhanVien.ngaysinhnv=sc.nextLine();
-				}
-				else if(sua==4){
-					sc.nextLine();
-					System.out.println("Nhap dia chi nhan vien cap nhat: ");
-					NhanVien.diachinv=sc.nextLine();
-				}
-				System.out.println("Du lieu cua nhan vien sau khi sua: ");
-				NhanVien.xuat();
-			}
-                break;
-        }
+					System.out.println("Du lieu cua nhan vien sau khi sua: ");
+					NhanVien.xuat();
+	                break;
+            }
         if (!found)
             System.out.println("Khong tim thay nhan vien de sua !");
     }
@@ -178,7 +369,8 @@ public class DSNhanVien extends MENU{
     public void timkiem(){
         String MaNVTimKiem;
         boolean found=false;
-        System.out.print("Nhap ma nhan vien can tim: "); MaNVTimKiem=sc.nextLine();
+        System.out.print("Nhap ma nhan vien can tim: "); 
+		MaNVTimKiem=sc.nextLine();
         for (NHANVIEN NhanVien : DanhSachNhanVien){
             if (NhanVien.manv.equals(MaNVTimKiem)){
                 found = true;
@@ -211,9 +403,7 @@ public class DSNhanVien extends MENU{
                 	writer.write( ((BAOVE)x).catruc + ",");
                 }
                 writer.newLine(); // Xuống dòng cho mỗi nhân viên
-                
             }
-            System.out.println("Ghi file thanh cong!");
      
         } catch (Exception e) {
             e.printStackTrace();
@@ -267,7 +457,6 @@ public class DSNhanVien extends MENU{
                     DanhSachNhanVien.add(nv);
                 }            
             }   
-        
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -285,5 +474,59 @@ public class DSNhanVien extends MENU{
                return -1;
        }
        return 0;
+    }
+    public static boolean checkngaysinh(String z) {
+    	int check1=2;//Vi tri dau / thu nhat;
+    	char c1=z.charAt(check1);
+    	String c11=String.valueOf(c1);
+    	int check2=5;//Vi tri dau / thu 2;
+    	char c2=z.charAt(check2);
+    	String c22=String.valueOf(c2);
+    	if(z.length() == 10 && c11.equals("/") && c22.equals("/")){
+    		try{
+    			int day = Integer.parseInt(z.substring(0, 2));
+                int month = Integer.parseInt(z.substring(3, 5));
+                int year = Integer.parseInt(z.substring(6));
+                boolean namnhuan=false;
+                if((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                    namnhuan=true;
+                }
+                int songaytrongthang = 0;
+                switch (month)
+            	{
+            	case 1:
+            	case 3:
+            	case 5:
+            	case 7:
+            	case 8:
+            	case 10:
+            	case 12: 
+            		songaytrongthang = 31;
+            		break;
+            	case 4:
+            	case 6:
+            	case 9:
+            	case 11: 
+            		songaytrongthang = 30;
+            		break;
+            	case 2:
+            		if(!namnhuan)
+            		{
+            			songaytrongthang = 28;
+            		}
+            		else
+            		{
+            			songaytrongthang = 29;
+            		}
+            		break;
+            	}
+            	if(day>=1 && day<=songaytrongthang && month>=1 && month<=12 && year>0) {
+            		return true;
+            	}
+            } catch (NumberFormatException e) {
+                // Xử lý nếu không chuyển được sang số
+            }
+    	}
+    	return false;
     }
 }

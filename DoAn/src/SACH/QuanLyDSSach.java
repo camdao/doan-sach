@@ -2,8 +2,10 @@ package SACH;
 
 import java.util.Scanner;
 
+import abstr_interf.CHECK;
+
 public class QuanLyDSSach{
-    public DSSach dsSach = new DSSach();
+    private DSSach dsSach = new DSSach();
     Scanner sc=new Scanner(System.in);
 
     public void Menu(){
@@ -12,7 +14,24 @@ public class QuanLyDSSach{
         while(flag){
             System.out.print(" 1)Them sach\n 2)Xoa sach\n 3)Sua sach\n 4)Xuat danh sach sach\n 5)Tim kiem sach\n 6)Kho sach\n 7)Quay lai\n 8)Thoat\n");
             System.out.print("Lua chon: ");
-            lua_chon=sc.nextInt();
+            String tmp;
+            tmp=sc.nextLine();
+        while(true){
+               if(CHECK.isInteger(tmp)==true){
+                    lua_chon=Integer.parseInt(tmp);
+                    if(lua_chon>=1 && lua_chon<=8)
+                        break;
+                    else{
+                        System.out.print("Nhap sai thong tin\n1)Them sach\n 2)Xoa sach\n 3)Sua sach\n 4)Xuat danh sach sach\n 5)Tim kiem sach\n 6)Kho sach\n 7)Quay lai\n 8)Thoat\n");
+                        System.out.print("Lua chon: ");
+                        tmp=sc.nextLine();
+                    }
+               }
+               else{
+                    System.out.println("Vui long nhap so nguyen");
+                    tmp=sc.nextLine();
+               }   
+            }
             switch(lua_chon){
                 case 1:
                     dsSach.them();
