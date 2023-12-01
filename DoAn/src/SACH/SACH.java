@@ -42,7 +42,18 @@ public class SACH implements INhap,IXuat{
 
     public void nhap(){
         System.out.println("Nhap cac thong tin cua sach: ");
-        System.out.print("Ma sach: "); MaSach=sc.nextLine();
+        String m;
+        while(true){//sửa mã sách
+            System.out.println("Ma sach: ");
+                m=sc.nextLine();
+            int flag1=DSSach.check_ma_sach_trung_lap(m);
+            if(flag1==-1)
+                    System.out.println("!!! Ma sach da ton tai");
+            else if(flag1==0) {
+                setMaSach(m);
+                break;
+            }
+        }  
         System.out.print("Ten sach: "); TenSach=sc.nextLine();
         System.out.print("Nha xuat ban: "); NXB=sc.nextLine();
         System.out.print("Tac gia: "); TacGia=sc.nextLine();

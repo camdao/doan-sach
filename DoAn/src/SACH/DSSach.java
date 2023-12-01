@@ -16,8 +16,6 @@ import abstr_interf.MENU;
 
 public class DSSach  extends MENU{
     public static ArrayList <SACH> DanhSachSach;
-    private static ArrayList<String> danhSachMaSach = new ArrayList<>();
-
     Scanner sc = new Scanner(System.in); 
 
     public DSSach(){
@@ -26,19 +24,11 @@ public class DSSach  extends MENU{
 
     public void them(){
         SACH sachmoi = new SACH();
-        while (true) {
-            sachmoi.nhap();
-            if (danhSachMaSach.contains(sachmoi.getMaSach())){
-                System.out.println("ma sach " + sachmoi.getMaSach() + "da ton tai");
-            }
-            else{
-                break;
-            }
-        }
+        sachmoi.nhap();
         DanhSachSach.add(sachmoi);
         themsach(sachmoi.toString());
         SACH.updateKhoSach(sachmoi.getSoLuong());
-        System.out.println("them thanh cong");
+        
     }
     public void xoa(){
         String MaSachXoa;
@@ -56,7 +46,6 @@ public class DSSach  extends MENU{
             System.out.println("Khong tim thay sach de xoa");
         else{
             luu();
-
         }
     }
     public void sua(){//sửa 3
@@ -90,15 +79,18 @@ public class DSSach  extends MENU{
             }
                 switch (lua_chon) {
                     case 1:
-                        while (true) {
-                            sach.setMaSach(sc.nextLine());
-                            if (danhSachMaSach.contains(sach.getMaSach())){
-                                System.out.println("ma sach " + sach.getMaSach() + "da ton tai");
-                            }
-                            else{
+                         String m;
+                        while(true){
+                            System.out.println("Nhap ma sach moi: ");
+                             m=sc.nextLine();
+                            int flag1=DSSach.check_ma_sach_trung_lap(m);
+                            if(flag1==-1)
+                                 System.out.println("!!! Ma sach da ton tai");
+                            else if(flag1==0) {
+                                sach.setMaSach(m);
                                 break;
                             }
-                        }              
+                        }
                         break;
                     case 2:
                         System.out.print("Nhap ten sach moi: ");
@@ -234,10 +226,6 @@ public class DSSach  extends MENU{
         } catch (IOException e) {
             System.out.println("loi tep");
         }
-
-        for (SACH sach : DanhSachSach) {
-            danhSachMaSach.add(sach.getMaSach());
-        }
     }
 
     private static SACH createSachFromLine(String line) {
@@ -270,4 +258,13 @@ public class DSSach  extends MENU{
             i++;
         }
     }
+
+public static int check_ma_sach_trung_lap(String y){//sửa1
+         for(SACH x : DanhSachSach){
+            if(x.getMaSach().equals(y))
+                return -1;
+        }
+        return 0;
+    }
+
 }
