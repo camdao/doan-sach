@@ -37,7 +37,7 @@ public class SACH implements INhap,IXuat{
     }
 
     public void xuat(){
-        System.out.print("Ma sach: "+MaSach+", Ten sach: "+TenSach+", Nha xuat ban: "+NXB+", Tac gia: "+TacGia+", So Trang: "+SoTrang+", So luong:"+SoLuong+", Gia Tien: "+GiaTien);
+        System.out.print("Ma sach: "+MaSach+", Ten sach: "+TenSach+", Nha xuat ban: "+NXB+", Tac gia: "+TacGia+", So Trang: "+SoTrang+", So luong:"+SoLuong+", Gia Tien: "+GiaTien+"\n");
     }
 
     public void nhap(){
