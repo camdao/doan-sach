@@ -16,6 +16,8 @@ import abstr_interf.MENU;
 
 public class DSSach  extends MENU{
     public static ArrayList <SACH> DanhSachSach;
+    private static ArrayList<String> danhSachMaSach = new ArrayList<>();
+
     Scanner sc = new Scanner(System.in); 
 
     public DSSach(){
@@ -24,11 +26,19 @@ public class DSSach  extends MENU{
 
     public void them(){
         SACH sachmoi = new SACH();
-        sachmoi.nhap();
+        while (true) {
+            sachmoi.nhap();
+            if (danhSachMaSach.contains(sachmoi.getMaSach())){
+                System.out.println("ma sach " + sachmoi.getMaSach() + "da ton tai");
+            }
+            else{
+                break;
+            }
+        }
         DanhSachSach.add(sachmoi);
         themsach(sachmoi.toString());
         SACH.updateKhoSach(sachmoi.getSoLuong());
-        
+        System.out.println("them thanh cong");
     }
     public void xoa(){
         String MaSachXoa;
@@ -80,8 +90,15 @@ public class DSSach  extends MENU{
             }
                 switch (lua_chon) {
                     case 1:
-                        System.out.print("Nhap ma sach moi: ");
-                        sach.setMaSach(sc.nextLine());
+                        while (true) {
+                            sach.setMaSach(sc.nextLine());
+                            if (danhSachMaSach.contains(sach.getMaSach())){
+                                System.out.println("ma sach " + sach.getMaSach() + "da ton tai");
+                            }
+                            else{
+                                break;
+                            }
+                        }              
                         break;
                     case 2:
                         System.out.print("Nhap ten sach moi: ");
@@ -216,6 +233,10 @@ public class DSSach  extends MENU{
             bufferedReader.close();
         } catch (IOException e) {
             System.out.println("loi tep");
+        }
+
+        for (SACH sach : DanhSachSach) {
+            danhSachMaSach.add(sach.getMaSach());
         }
     }
 
