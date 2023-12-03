@@ -8,14 +8,14 @@ public class KHACHHANG implements INhap,IXuat{
     public String Phone;
     Scanner sc=new Scanner(System.in);
   
-    public KHACHHANG() {//khởi tạo
+    public KHACHHANG() {
         Id = ""; Name = "";
         Address = "";Phone = "";
     }
     
     public void nhap(){
         String x,y;//2 biến để làm biến tạm kiểm tra xem có trùng lặp data không
-        while(true){//nhập mã khách hàng
+        while(true){
             System.out.println("Nhap MA khach hang");
             x=sc.nextLine();
             int flag1=DSKHACHHANG.check_id_trung_lap(x);
@@ -30,8 +30,7 @@ public class KHACHHANG implements INhap,IXuat{
             Name=sc.nextLine();
         System.out.println("Nhap DIA CHI khach hang ");
             Address=sc.nextLine();
-       
-        while(true){//nhập số điện thoại khách hàng
+        while(true){
             System.out.println("Nhap SO DIEN THOAI khach hang ");
             y=sc.nextLine();
         int flag2=DSKHACHHANG.check_phone_trung_lap(y);

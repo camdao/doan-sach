@@ -101,7 +101,7 @@ public class DSNhanVien extends MENU{
     public void xoa(){
         String MaNVXoa;
         boolean found=false;
-        System.out.print("Nhap ma nhan vien muon xoa: "); 
+		System.out.print("Nhap ma nhan vien muon xoa: "); 
         MaNVXoa=sc.nextLine();
         for (NHANVIEN NhanVien : DanhSachNhanVien)
             if (NhanVien.manv.equals(MaNVXoa)){
@@ -124,15 +124,15 @@ public class DSNhanVien extends MENU{
             	if(NhanVien instanceof THUNGAN) {	            	
 	            	found=true;
 	            	String tmp;
-	            	System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay ban hang.");
+	            	System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Luong. \n7.Ngay ban hang.");
 	                tmp=sc.nextLine();	                
 	                while(true){
 	                    if(CHECK.isInteger(tmp)==true){
 	                        sua=Integer.parseInt(tmp);
-	                        if(sua>=1&&sua<=6)
+	                        if(sua>=1&&sua<=7)
 	                            break;
 	                        else{
-	                           System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay ban hang.");
+	                           System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Luong. \n7.Ngay ban hang.");
 	                            tmp=sc.nextLine();
 	                        }
 	                    }
@@ -169,7 +169,7 @@ public class DSNhanVien extends MENU{
 				            	System.out.println("Dinh dang ngay sinh khong hop le. Su dung dinh dang dd/mm/yyyy!");
 				            }
 				            else{
-				                nhaplaingaysinh = true;
+								nhaplaingaysinh = true;
 				            }
 				        }
 					}
@@ -193,22 +193,35 @@ public class DSNhanVien extends MENU{
 						NhanVien.diachinv=sc.nextLine();
 					}
 					else if(sua==6) {
-						System.out.println("Nhap ngay ban hang cap nhat: ");
-						((THUNGAN)NhanVien).ngaybanhang=sc.nextLine();
+						System.out.println("Nhap luong cap nhat: ");
+						NhanVien.luong=sc.nextLine();
+					}
+					else if(sua==7) {
+						boolean nhaplai=false;
+					    while (!nhaplai) {
+					    	System.out.println("Nhap ngay ban hang cap nhat: ");
+					    	((THUNGAN)NhanVien).ngaybanhang=sc.nextLine();
+				            if(!checkngaysinh(((THUNGAN)NhanVien).ngaybanhang)){
+				            	System.out.println("Dinh dang ngay khong hop le. Su dung dinh dang dd/mm/yyyy!");
+				            }
+				            else{
+				                nhaplai = true;
+				            }
+				        }
 					}
             	}
 				else if(NhanVien instanceof KHO) {
 					found=true;
 					String tmp;
-					System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay kiem kho.");
+					System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Luong. \n7.Ngay kiem kho.");
 					tmp=sc.nextLine();	                
 					while(true){
 						if(CHECK.isInteger(tmp)==true){
 							sua=Integer.parseInt(tmp);
-							if(sua>=1&&sua<=6)
+							if(sua>=1&&sua<=7)
 								break;
 							else{
-								System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ngay kiem kho.");
+								System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Luong \n7.Ngay kiem kho.");
 								tmp=sc.nextLine();
 							}
 						}
@@ -230,7 +243,7 @@ public class DSNhanVien extends MENU{
 								NhanVien.manv = k;
 								checkvar=false;
 							}
-						}
+}
 					}
 					else if(sua==2) {
 						System.out.println("Nhap ten nhan vien cap nhat: ");
@@ -269,22 +282,35 @@ public class DSNhanVien extends MENU{
 						NhanVien.diachinv=sc.nextLine();
 					}
 					else if(sua==6) {
-						System.out.println("Nhap ngay kiem kho cap nhat: ");
-						((KHO)NhanVien).ngaykiemkho=sc.nextLine();
+						System.out.println("Nhap luong cap nhat: ");
+						NhanVien.luong=sc.nextLine();
+					}
+					else if(sua==7) {
+						boolean nhaplai=false;
+						while (!nhaplai) {
+							System.out.println("Nhap ngay kiem kho cap nhat: ");
+							((KHO)NhanVien).ngaykiemkho=sc.nextLine();
+							if(!checkngaysinh(((KHO)NhanVien).ngaykiemkho)){
+								System.out.println("Dinh dang ngay khong hop le. Su dung dinh dang dd/mm/yyyy!");
+							}
+							else{
+								nhaplai = true;
+							}
+						}
 					}
 				}
 				else if(NhanVien instanceof BAOVE) {
 					found=true;
 					String tmp;
-					System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ca truc.");
+					System.out.println("Chon muc can sua: \n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Luong. \n7.Ca truc.");
 					tmp=sc.nextLine();	                
 					while(true){
 						if(CHECK.isInteger(tmp)==true){
 							sua=Integer.parseInt(tmp);
-							if(sua>=1&&sua<=6)
+							if(sua>=1&&sua<=7)
 								break;
 							else{
-								System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Ca truc.");
+								System.out.println("Nhap sai lua chon\n1.Ma nhan vien. \n2.Ten nhan vien. \n3.Ngay sinh nhan vien. \n4.SDT nhan vien. \n5.Dia chi. \n6.Luong. \n7.Ca truc.");
 								tmp=sc.nextLine();
 							}
 						}
@@ -345,6 +371,10 @@ public class DSNhanVien extends MENU{
 						NhanVien.diachinv=sc.nextLine();
 					}
 					else if(sua==6) {
+						System.out.println("Nhap luong cap nhat: ");
+						NhanVien.luong=sc.nextLine();
+					}
+					else if(sua==7) {
 						System.out.println("Nhap ca truc cap nhat: ");
 						((BAOVE)NhanVien).catruc=sc.nextLine();
 					}
@@ -369,15 +399,14 @@ public class DSNhanVien extends MENU{
     public void timkiem(){
         String MaNVTimKiem;
         boolean found=false;
-        System.out.print("Nhap ma nhan vien can tim: "); 
-		MaNVTimKiem=sc.nextLine();
+        System.out.print("Nhap ma nhan vien can tim: "); MaNVTimKiem=sc.nextLine();
         for (NHANVIEN NhanVien : DanhSachNhanVien){
             if (NhanVien.manv.equals(MaNVTimKiem)){
                 found = true;
                 NhanVien.xuat();
                 break;
             }
-        }
+		}
         if (!found)
             System.out.println("Khong tim thay nhan vien !");
     }
@@ -402,9 +431,8 @@ public class DSNhanVien extends MENU{
                 	writer.write("3,");
                 	writer.write( ((BAOVE)x).catruc + ",");
                 }
-                writer.newLine(); // Xuống dòng cho mỗi nhân viên
+                writer.newLine();
             }
-     
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -449,7 +477,7 @@ public class DSNhanVien extends MENU{
                     ((BAOVE)nv).catruc = parts[7];
                     nv.manv = maNV;
                     nv.tennv = tenNV;
-                    nv.ngaysinhnv = ngaySinhNV;
+					nv.ngaysinhnv = ngaySinhNV;
                     nv.sdtnv = sdtNV;
                     nv.diachinv = diaChiNV;
                     nv.luong = luongNV;
@@ -476,13 +504,7 @@ public class DSNhanVien extends MENU{
        return 0;
     }
     public static boolean checkngaysinh(String z) {
-    	int check1=2;//Vi tri dau / thu nhat;
-    	char c1=z.charAt(check1);
-    	String c11=String.valueOf(c1);
-    	int check2=5;//Vi tri dau / thu 2;
-    	char c2=z.charAt(check2);
-    	String c22=String.valueOf(c2);
-    	if(z.length() == 10 && c11.equals("/") && c22.equals("/")){
+    	if(z.length() == 10){
     		try{
     			int day = Integer.parseInt(z.substring(0, 2));
                 int month = Integer.parseInt(z.substring(3, 5));
@@ -524,7 +546,6 @@ public class DSNhanVien extends MENU{
             		return true;
             	}
             } catch (NumberFormatException e) {
-                // Xử lý nếu không chuyển được sang số
             }
     	}
     	return false;

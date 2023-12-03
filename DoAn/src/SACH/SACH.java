@@ -1,6 +1,5 @@
 package SACH;
 import java.util.Scanner;
-
 import abstr_interf.*;
 
 public class SACH implements INhap,IXuat{
@@ -18,7 +17,7 @@ public class SACH implements INhap,IXuat{
     public static int getKhoSach(){
         return KhoSach;
     }
-    public static void updateKhoSach(int n){//n la so luong sach muon them hoac giam 
+    public static void updateKhoSach(int n){ 
         KhoSach+=n;
     }
     public SACH(){
@@ -43,7 +42,7 @@ public class SACH implements INhap,IXuat{
     public void nhap(){
         System.out.println("Nhap cac thong tin cua sach: ");
         String m;
-        while(true){//sửa mã sách
+        while(true){
             System.out.println("Ma sach: ");
                 m=sc.nextLine();
             int flag1=DSSach.check_ma_sach_trung_lap(m);
@@ -57,7 +56,6 @@ public class SACH implements INhap,IXuat{
         System.out.print("Ten sach: "); TenSach=sc.nextLine();
         System.out.print("Nha xuat ban: "); NXB=sc.nextLine();
         System.out.print("Tac gia: "); TacGia=sc.nextLine();
-        //sửa 1
         String tmp1;
         System.out.print("So trang: "); 
             tmp1=sc.nextLine();
@@ -76,7 +74,6 @@ public class SACH implements INhap,IXuat{
                     tmp1=sc.nextLine();
                }   
             }
-        //sửa 2
         String tmp2;
         System.out.print("So luong: ");  
             tmp2=sc.nextLine();
@@ -97,7 +94,6 @@ public class SACH implements INhap,IXuat{
                     tmp2=sc.nextLine();
                }   
             }
-        //sửa 3
         String tmp3;
         System.out.print("Gia Tien ");  
             tmp3=sc.nextLine();
@@ -117,7 +113,6 @@ public class SACH implements INhap,IXuat{
                }   
             }
     }
-
     @Override
     public String toString() {
         return MaSach + "|" + TenSach + "|" + NXB+ "|" + TacGia + "|" + SoTrang+ "|" + SoLuong + "|" + GiaTien;
@@ -125,55 +120,43 @@ public class SACH implements INhap,IXuat{
     public String getMaSach() {
         return MaSach;
     }
-
     public void setMaSach(String maSach) {
         MaSach = maSach;
     }
-
     public String getTenSach() {
         return TenSach;
     }
-
     public void setTenSach(String tenSach) {
         TenSach = tenSach;
     }
-    
+
     public String getNXB() {
         return NXB;
     }
-
     public void setNXB(String nxb) {
         NXB = nxb;
     }
-
     public String getTacGia() {
         return TacGia;
     }
-
     public void setTacGia(String tacGia) {   
         TacGia = tacGia;
     }
-
     public int getSoTrang() {
         return SoTrang;
     }
-
     public void setSoTrang(int SoTrang) {
         this.SoTrang = SoTrang;
     }
-
     public int getSoLuong() {
         return SoLuong;
     }
-
     public void setSoLuong(int SoLuong) {
         this.SoLuong = SoLuong;
     }
-
     public int getGiaTien() {
         return GiaTien;
     }
-
     public void setGiaTien(int GiaTien) {
         this.GiaTien = GiaTien;
     }

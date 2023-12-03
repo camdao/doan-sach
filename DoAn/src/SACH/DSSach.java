@@ -50,13 +50,12 @@ public class DSSach  extends MENU{
     }
     public void sua(){//sửa 3
         String MaSachSua;
-        boolean found=false;
         System.out.print("Nhap ma sach muon sua: ");
         MaSachSua=sc.nextLine();
-
-        for (SACH sach : DanhSachSach){//sửa 1
+        boolean found=false;
+        for (SACH sach : DanhSachSach){
             if (sach.getMaSach().equals(MaSachSua)){
-                found = true;
+                found=true;
                 sach.xuat();
                 int lua_chon;
                 String tmp;
@@ -126,7 +125,7 @@ public class DSSach  extends MENU{
                                 }   
                             }       
                         break;
-                    case 6://sửa4
+                    case 6:
                         String tmp3;int soluong;
                         System.out.print("Nhap so luong moi: ");
                         tmp3=sc.nextLine();
@@ -173,11 +172,11 @@ public class DSSach  extends MENU{
                         break;
                 }
             }
-        if (!found)
-            System.out.println("Khong tim thay ma sach !");
         else
             luu();
         }
+        if (!found)
+            System.out.println("Khong tim thay sach de sua !");
     }
     public void timkiem(){
         String MaSachTimKiem;
@@ -259,7 +258,7 @@ public class DSSach  extends MENU{
         }
     }
 
-public static int check_ma_sach_trung_lap(String y){//sửa1
+public static int check_ma_sach_trung_lap(String y){
          for(SACH x : DanhSachSach){
             if(x.getMaSach().equals(y))
                 return -1;

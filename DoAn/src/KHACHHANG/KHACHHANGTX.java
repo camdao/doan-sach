@@ -1,12 +1,11 @@
 package KHACHHANG;
 import java.util.Scanner;
-
 import abstr_interf.CHECK;
 
-public class KHACHHANGTX extends KHACHHANG{//kế thừa
+public class KHACHHANGTX extends KHACHHANG{
         private int diemtichluy;
         Scanner sc=new Scanner(System.in);
-        public KHACHHANGTX(){//khởi tạo
+        public KHACHHANGTX(){
             super();
             diemtichluy = 0;
         }
@@ -15,7 +14,6 @@ public class KHACHHANGTX extends KHACHHANG{//kế thừa
             String tmp;
             super.nhap();
             System.out.println("Nhap DIEM TICH LUY cua khach hang ");
-
             tmp=sc.nextLine();
             while(true){
                 if(CHECK.isInteger(tmp)==true){
@@ -37,13 +35,12 @@ public class KHACHHANGTX extends KHACHHANG{//kế thừa
         public void xuat() {
             super.xuat();
             System.out.println("DIEM TICH LUY: " + diemtichluy);
-            System.out.println("-----------------------------------------------------------------");
+            System.out.println("-------------------------------------------------");
         }
-        
         public int getDiemtichluy(){
             return diemtichluy;
         }
-        public void setDiemtichluy(int diemtichluy){//tăng điểm tích lũy khi mua hàng
+        public void setDiemtichluy(int diemtichluy){
             this.diemtichluy=diemtichluy;
         }
     }

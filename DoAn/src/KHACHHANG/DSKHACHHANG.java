@@ -5,10 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import abstr_interf.*;
 public class DSKHACHHANG extends MENU{
-    public static ArrayList<KHACHHANG> DSKH;//danh sách mảng
-    public DSKHACHHANG(){//khởi tạo
+    public static ArrayList<KHACHHANG> DSKH;
+    public DSKHACHHANG(){
         DSKH= new ArrayList<KHACHHANG>();
     }
     Scanner sc=new Scanner(System.in);
@@ -37,28 +38,27 @@ public class DSKHACHHANG extends MENU{
             KHACHHANG x= new KHACHHANGTX();
             x.nhap();
             DSKH.add(x);
-            System.out.printf("------------------\n|Da them vao data|\n------------------\n");
         }
         else if(choose==2){
             KHACHHANG x= new KHACHHANGONLINE();
             x.nhap();
             DSKH.add(x);
-            System.out.printf("------------------\n|Da them vao data|\n------------------\n");
         }
     }
 
     public void sua(){//chỉnh sửa theo thong tin
-        int choose=0;//chú ý khởi tạo trước khi sử dụng để check ở dưới
+        int choose=0;
         String S_MA;
         System.out.println("\nNhap Ma Khach Hang can sua");
         S_MA=sc.nextLine();
         String s;
-
+        boolean found=false;
         for(KHACHHANG x :DSKH){
             if(x.Id.equals(S_MA)){
                 if(x instanceof KHACHHANGTX){//x là khách hàng thường xuyên
+                    found=true;
                     System.out.print("\nChon muc can sua thong tin:\n1:Ma Khach Hang\n2:Ho ten\n3:Dia chi\n4:So dien thoai\n5:Diem tich luy\n");
-                    String tmp=sc.nextLine();//biến string tạm đi kiểm tra có phải int không
+                    String tmp=sc.nextLine();
                     while(true){
                         if(CHECK.isInteger(tmp)==true){
                             choose=Integer.parseInt(tmp);
@@ -101,7 +101,7 @@ public class DSKHACHHANG extends MENU{
                     }
                     else if(choose==4){//cập nhật số điện thoại
                         String k;
-                        while(true){//nhập số điện thoại khách hàng
+                        while(true){
                             System.out.println("Nhap SO DIEN THOAI cap nhat");
                             k=sc.nextLine();
                             int flag2=DSKHACHHANG.check_phone_trung_lap(k);
@@ -116,7 +116,7 @@ public class DSKHACHHANG extends MENU{
                     else if(choose==5){//cập nhật điểm tích lũy
                         System.out.println("Nhap DIEM TICH LUY cap nhat");
                         int k=0;
-                        tmp=sc.nextLine();//biến string tạm đi kiểm tra có phải int không
+                        tmp=sc.nextLine();
                         while(true){
                             if(CHECK.isInteger(tmp)==true){
                                 k=Integer.parseInt(tmp);
@@ -125,7 +125,7 @@ public class DSKHACHHANG extends MENU{
                                     break;
                                 }
                                 else{
-                                    System.out.println("~ Vui long nhap diem tich luy > 0 ~");
+                                    System.out.println("Vui long nhap diem tich luy > 0 ");
                                     tmp=sc.nextLine();
                                 }
                             }
@@ -138,6 +138,7 @@ public class DSKHACHHANG extends MENU{
                 }
 
                 else if(x instanceof KHACHHANGONLINE){//x là khách hàng online
+                    found=true;
                     System.out.print("\nChon muc can sua thong tin:\n1:Ma Khach Hang\n2:Ho ten\n3:Dia chi\n4:So dien thoai\n5:Ma don hang\n6:Gmail\n");
                     String tmp=sc.nextLine();
                     while(true){
@@ -152,11 +153,10 @@ public class DSKHACHHANG extends MENU{
                                 }
                         }
                         else{
-                            System.out.println("vui long nhap so nguyen");
+                            System.out.println("Vui long nhap so nguyen");
                             tmp=sc.nextLine();
                         }
                     }
-
 
                     if(choose==1){//cập nhật mã khách hàng
                         String k;
@@ -184,7 +184,7 @@ public class DSKHACHHANG extends MENU{
                     }
                     else if(choose==4){//cập nhật số điện thoại
                         String k;
-                        while(true){//nhập số điện thoại khách hàng
+                        while(true){
                             System.out.println("Nhap SO DIEN THOAI cap nhat");
                             k=sc.nextLine();
                             int flag2=DSKHACHHANG.check_phone_trung_lap(k);
@@ -198,7 +198,7 @@ public class DSKHACHHANG extends MENU{
                     }
                     else if(choose==5){//cập nhật mã đơn hàng
                         String m;
-                        while(true){//nhập mã đơn hàng
+                        while(true){
                             System.out.println("Nhap MA DON HANG cap nhat ");
                              m=sc.nextLine();
                             int flag1=DSKHACHHANG.check_madonhang_trung_lap(m);
@@ -229,20 +229,29 @@ public class DSKHACHHANG extends MENU{
                         } while (true);
                     }
                 }
+                System.out.println("Du lieu cua Khach hang sau khi sua: ");
+                x.xuat();
+                break;
             }
         }
+        if (!found)
+            System.out.println("Khong tim thay khach hang de sua !");
     }
 
     public void xoa(){//xóa theo id khách hàng
+        boolean found=false;
         System.out.println("Nhap ID KHACH HANG can xoa");
         String S_MA=sc.nextLine();
         for(KHACHHANG x:DSKH){
             if(S_MA.equals(x.Id)){
                 DSKH.remove(x);
+                found=true;
                 System.out.println("DA XOA");
                 break;
             }
         }
+        if (!found)
+            System.out.println("Khong tim thay nhan vien de xoa");
     }
 
     public void timkiem(){//tìm kiếm theo ten khach hang
@@ -264,32 +273,32 @@ public class DSKHACHHANG extends MENU{
                System.out.println("KHONG tim thay!!");
     }
 
-    public void danhsach() {//xuất danh sách lưu trong list
+    public void danhsach() {//xuất danh sách
         for(KHACHHANG x : DSKH){
             x.xuat();
         }
     }
 
-    public static void luu() {//chia truong hop viet vao
-        try {
+    public static void luu(){
+        try{
             FileWriter fw = new FileWriter("DS-KH.txt");
             for (KHACHHANG x : DSKH) {
-                if(x instanceof KHACHHANGTX)//READ AGAIN
+                if(x instanceof KHACHHANGTX)
                     fw.write(x.Id +"|"+x.Name+"|"+x.Address+"|"+x.Phone+"|"+((KHACHHANGTX)x).getDiemtichluy()+"\n");
                 else if(x instanceof KHACHHANGONLINE)
                     fw.write(x.Id +"|"+x.Name+"|"+x.Address+"|"+x.Phone+"|"+((KHACHHANGONLINE)x).getMadonhang()+"|"+((KHACHHANGONLINE)x).getGmail()+"\n");
             }
             fw.close();
             }
-             catch (Exception e) {
-                System.out.println(e);
-            }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
-    public static void doc() {
-        try (BufferedReader input = new BufferedReader(new FileReader("DS-KH.txt"))) {
+    public static void doc(){
+        try(BufferedReader input = new BufferedReader(new FileReader("DS-KH.txt"))) {
             String line = input.readLine();
-            while (line != null) {
+            while (line != null){
                 String[] parts = line.split("\\|");
                 KHACHHANG y=new KHACHHANG();
 
@@ -310,7 +319,8 @@ public class DSKHACHHANG extends MENU{
 
                 line = input.readLine();
             }
-        } catch (IOException e) {
+        } 
+        catch (IOException e){
             e.printStackTrace();
         }
     }

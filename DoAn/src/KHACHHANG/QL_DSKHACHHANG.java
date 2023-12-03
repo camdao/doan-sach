@@ -49,8 +49,7 @@ public class QL_DSKHACHHANG {
                     x.danhsach();
                     break;
                 case 6:
-                    //static nên gọi class và tên hàm khi thực hiện
-                    DSKHACHHANG.luu();//lưu file sau khi thoát chương trình
+                    DSKHACHHANG.luu();
                     flag=false;
                     break;
                 case 7:

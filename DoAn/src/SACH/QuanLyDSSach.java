@@ -1,7 +1,6 @@
 package SACH;
 
 import java.util.Scanner;
-
 import abstr_interf.CHECK;
 
 public class QuanLyDSSach{
@@ -58,7 +57,6 @@ public class QuanLyDSSach{
                 case 8:
                     DSSach.luu();
                     System.exit(0);
-
             }
         }
     }

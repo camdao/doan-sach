@@ -1,12 +1,7 @@
 package HOADON;
 
-
 import java.util.Scanner;
-
 import abstr_interf.CHECK;
-
-//import NHANVIEN.*;
-//import SACH.*;
 
 public class QuanLyDSHoaDon{
     public DSHoaDon dsHoaDon;
@@ -41,7 +36,7 @@ public class QuanLyDSHoaDon{
                     DSHoaDon.WriteFile();
                     break;
                 case 6:
-                    DSHoaDon.WriteFile();//dsHoaDon.WriteFile();
+                    DSHoaDon.WriteFile();
                     System.exit(0);
                 default:
                     System.out.println("Lua chon khong hop le !");

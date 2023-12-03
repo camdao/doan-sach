@@ -21,7 +21,7 @@ public class DSHoaDon {
     public DSHoaDon (){
         DanhSachHoaDon = new ArrayList<HOADON>(0);
     }
-    //Scanner sc = new Scanner(System.in);
+    
     private void nhapMaHoaDon(HOADON HoaDonMoi){
         Scanner sc = new Scanner(System.in);
         boolean flag;
@@ -264,7 +264,6 @@ public class DSHoaDon {
     }
     public void danhsach(){
         int tong=0;
-        //System.out.println("Danh sach co "+DanhSachHoaDon.size()+" hoa don:");
         int i=1;
         for (HOADON hoadon : DanhSachHoaDon) {
             tong+=hoadon.TongTien();
@@ -341,32 +340,26 @@ public class DSHoaDon {
                 for (String masach : line2) {
                     hoadon.ChiTietHoaDon.DanhSachMaSanPham.add(masach);
                 }
-            
                 buff = reader.readLine();
                 line3 = buff.split(",");
                 for (String tensach : line3) {
                     hoadon.ChiTietHoaDon.DanhSachSanPham.add(tensach);
                 }
-
                 buff = reader.readLine();
                 line4 = buff.split(",");
                 for (String dongia : line4){
                     int num = Integer.parseInt(dongia);
                     hoadon.ChiTietHoaDon.DonGiaMoiSP.add(num);
                 }
-
                 buff = reader.readLine();
                 line5 = buff.split(",");
                 for (String soluong : line5){
                     int num = Integer.parseInt(soluong);
                     hoadon.ChiTietHoaDon.SoLuongMoiSP.add(num);
                 }
-
                 DanhSachHoaDon.add(hoadon);
             }
-
         } catch (IOException e) {
-
             e.printStackTrace();
         }
     }

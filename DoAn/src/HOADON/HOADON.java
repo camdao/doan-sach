@@ -1,6 +1,4 @@
 package HOADON;
-
-//import SACH.*;
 import abstr_interf.*;
 
 public class HOADON implements IXuat{

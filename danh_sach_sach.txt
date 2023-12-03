@@ -1,6 +1,5 @@
 001|Conan|Kim Dong|Aoyama Gosho|150|92|25000
-002|Doremon|Kim Dong|Fujiko Fujio|140|86|20000
-003|Giai Tich 1|NXB DHQG TPHCM|Nguyen Dinh Huy|200|47|100000
+002|Doremon|Kim Dong|Fujiko Fujio|140|84|20000
+003|Giai Tich 1|NXB DHQG TPHCM|Nguyen Dinh Huy|200|46|100000
 004|Giai Tich 2|NXB DHQG TPHCM| Nguyen Dinh Huy|110|37|110000
 005|Dragon ball|Kim Dong|Toriyama Akira|50|65|20000
-testdone|test|test|test|1|1|1

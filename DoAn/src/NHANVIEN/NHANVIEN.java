@@ -48,13 +48,14 @@ public class NHANVIEN implements INhap,IXuat{
 		
 	}
     public static boolean isValidNgaySinh(String ngaysinhnv) {
-    	int check1=2;//Vi tri dau / thu nhat;
-    	char c1=ngaysinhnv.charAt(check1);
-    	String c11=String.valueOf(c1);
-    	int check2=5;//Vi tri dau / thu 2;
-    	char c2=ngaysinhnv.charAt(check2);
-    	String c22=String.valueOf(c2);
-    	if(ngaysinhnv.length() == 10 && c11.equals("/") && c22.equals("/")){
+//    	int check1=2;//Vi tri dau / thu nhat;
+//    	char c1=ngaysinhnv.charAt(check1);
+//    	String c11=String.valueOf(c1);
+//    	int check2=5;//Vi tri dau / thu 2;
+//    	char c2=ngaysinhnv.charAt(check2);
+//    	String c22=String.valueOf(c2);
+//    	c11.equals("/") && c22.equals("/")
+    	if(ngaysinhnv.length() == 10 ){
     		try{
     			int day = Integer.parseInt(ngaysinhnv.substring(0, 2));
                 int month = Integer.parseInt(ngaysinhnv.substring(3, 5));
@@ -101,4 +102,5 @@ public class NHANVIEN implements INhap,IXuat{
     	}
     	return false;
     }
+
 }
