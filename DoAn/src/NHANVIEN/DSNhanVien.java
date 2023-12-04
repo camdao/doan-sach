@@ -16,9 +16,26 @@ public class DSNhanVien extends MENU{
     Scanner sc = new Scanner(System.in);
     
     public void them() {
-    	String choose;
-    	System.out.println("Nhap cong viec cua nhan vien: \n1.Thu ngan. \n2.Kho. \n3.Bao ve."); choose=sc.nextLine();
-		if(choose.equals("1")) {
+    	int choose=0;
+    	String tmp;
+    	System.out.println("Nhap cong viec cua nhan vien: \n1.Thu ngan. \n2.Kho. \n3.Bao ve."); tmp=sc.nextLine();
+        while(true){
+            if(CHECK.isInteger(tmp)==true){
+                 choose=Integer.parseInt(tmp);
+                 if(choose==1 || choose==2 || choose==3)
+                     break;
+                 else{
+                     System.out.println("Nhap sai thong tin! \nNhap cong viec cua nhan vien: \n1.Thu ngan. \n2.Kho. \n3.Bao ve.");
+                     tmp=sc.nextLine();
+                 }
+            }
+            else{
+                 System.out.println("Vui long nhap so nguyen!");
+                 System.out.println("Nhap cong viec cua nhan vien: \n1.Thu ngan. \n2.Kho. \n3.Bao ve.");
+                 tmp=sc.nextLine();
+            }   
+         }
+		if(choose==1) {
 			boolean nhaplaimanv=false;
 			NHANVIEN x=new THUNGAN();
 		    while (!nhaplaimanv) {
@@ -45,7 +62,7 @@ public class DSNhanVien extends MENU{
 			}
 			DanhSachNhanVien.add(x);
 		}
-		else if(choose.equals("2")) {
+		else if(choose==2) {
 		    boolean nhaplai = false;
             NHANVIEN x = new KHO();
             while (!nhaplai) {
@@ -71,7 +88,7 @@ public class DSNhanVien extends MENU{
 			}
 			DanhSachNhanVien.add(x);
 		}
-		else if(choose.equals("3")) {
+		else if(choose==3) {
 		    boolean nhaplai = false;
             NHANVIEN x = new BAOVE();
             while (!nhaplai) {
